@@ -42,10 +42,16 @@ repository:
         include: "#type"
       }
       {
+        include: "#operator"
+      }
+      {
         include: "#reference"
       }
       {
         include: "#regex"
+      }
+      {
+        include: "#rpm"
       }
       {
         include: "#sql"
@@ -100,6 +106,26 @@ repository:
         include: "#string"
       }
     ]
+  operator:
+    begin: "^\\s*(operator)\\s*:\\s*(\\\"|\\')"
+    beginCaptures:
+      "1":
+        name: "variable.parameter.tnsaudit"
+      "2":
+        name: "string.tnsaudit"
+    end: "(\\\"|\\')(?!\\w)"
+    endCaptures:
+      "1":
+        name: "string.tnsaudit"
+    patterns: [
+      {
+        match: "\\\\."
+        name: "constant.character.escape.tnsaudit"
+      },
+      {
+        include: "source.regexp"
+      }
+    ]
   other_keywords:
     match: "(?<=\\s)(NO|YES|NULL|LOW|MEDIUM|HIGH|ON|OFF)(?=[\\s\\,])"
     name: "meta.keyword.tnsaudit"
@@ -138,6 +164,30 @@ repository:
       "1":
         name: "string.tnsaudit"
     patterns: [
+      {
+        match: "\\\\."
+        name: "constant.character.escape.tnsaudit"
+      },
+      {
+        include: "source.regexp"
+      }
+    ]
+  rpm:
+    begin: "^\\s*(rpm)\\s*:\\s*(\\\"|\\')"
+    beginCaptures:
+      "1":
+        name: "variable.parameter.tnsaudit"
+      "2":
+        name: "string.tnsaudit"
+    end: "(\\\"|\\')(?!\\w)"
+    endCaptures:
+      "1":
+        name: "string.tnsaudit"
+    patterns: [
+      {
+        match: "\\\\."
+        name: "constant.character.escape.tnsaudit"
+      },
       {
         include: "source.regexp"
       }
